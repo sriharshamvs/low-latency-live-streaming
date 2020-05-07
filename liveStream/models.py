@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-fs = "liveStream/static/images"
+fs = "gallery"
 class LiveStream(models.Model):
     title = models.CharField(max_length=1000)
     stream_key = models.CharField(max_length=50)
