@@ -1,9 +1,8 @@
-from django.core.files.storage import FileSystemStorage
 from django.db import models
 
 # Create your models here.
-fs = FileSystemStorage(location='static/photos')
-class LiveStreamTheme(models.Model):
+fs = "liveStream/static/images"
+class LiveStream(models.Model):
     title = models.CharField(max_length=1000)
     stream_key = models.CharField(max_length=50)
     stream_url = models.CharField(max_length=1000)
