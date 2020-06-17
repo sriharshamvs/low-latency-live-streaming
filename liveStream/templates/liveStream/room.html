@@ -76,9 +76,13 @@
 <script>
 			const roomName='{{stream.comments_room}}';
 			const commentHost = '{{stream.comments_server}}';
+                        const contactName = '{{ contact.name }}';
 			var d = document, s = d.createElement('script');
 			s.src = 'https://'+commentHost+'/static/comments.js';
 			(d.head || d.body).appendChild(s);
+
+       
+
 </script>
     <script>
         OvenPlayer.debug(true);
