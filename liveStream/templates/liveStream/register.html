@@ -1,0 +1,13 @@
+{% extends 'liveStream/base.html' %}
+{% load bootstrap_tags %}
+
+{% block content %}
+    <h1 class="mt-2">Welcome to Live Stream - {{stream.title}}</h1>
+          <h2 class="mt-2">Please enter the following details to proceed</h2>
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form| as_bootstrap }}
+    <button type="submit" class="btn btn-success">Enter Live Streaming</button>
+  </form>
+{% endblock %}

@@ -2,6 +2,6 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-	path('', views.index, name='index'),
-    path('<stream_key>', views.room, name='room'),
+    path('', views.index, name='index'),
+    path('<stream_key>/', views.room, name='room'),
 ]

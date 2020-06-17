@@ -1,71 +1,112 @@
 {% load static %}
-<!doctype html>
-<html lang="te">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>{{ stream.title }}</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="{% static 'liveStream/style.css' %}">
-  <script src="{% static 'liveStream/ovenplayer/ovenplayer.js' %}"></script>
-</head>
- <body>
-    <nav class="navbar navbar-light bg-light justify-content-center">
-      <span class="navbar-brand mb-0 h1 red">{{ stream.title }}</span> <br>
-    </nav>
-    <div class="container">
-      <div class="row justify-content-center h-100">
-        <div class="col-sm-8">
-          <div id="player">
-          </div>
-        </div>
-        <div class="col-sm-4 schedule">
-          <div>
-            <p>{{ stream.description }}</p>
-            <img src="media/{{ stream.img_src }}" alt="{{title}}">
-          </div>
-        </div>
-      </div>
-    </div>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     
+   <title> {{stream.title}} </title>
    
-   <div class="container">
-     <div id="comment_thread">
-     </div>
-   </div>
+    <script src="{% static 'liveStream/ovenplayer/ovenplayer.js' %}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css" crossorigin="anonymous"></script>
+<link rel="shortcut icon" type="image/png" href="/swecha-birds-icon.png"/>
+    <link rel="stylesheet" href="{% static 'liveStream/style.css' %}">
+<!-- Matomo -->
+	<script type="text/javascript">
+		  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+	  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+	      var u="//analytics.patham.in/";
+	      _paq.push(['setTrackerUrl', u+'matomo.php']);
+	      _paq.push(['setSiteId', '{{ stream.matomo_site_id }}']);
+	      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+	      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+	    })();
+	</script>
+	<!-- End Matomo Code -->
 
+</head>
+<body>
+    <div class="wrapperContainer">
+        <div class="navigation">
+            <header>
+                <nav>
+            
+ <div class="logo">
+
+                     <table>
+                        <tr>
+                        <td><img src="{{ stream.icon_url }}" alt="logo"></td>
+                        </tr>
+                     </table>
+
+                    
+                   </div>
+                    <div class="headerContent">
+			<h3><a href="https://swecha.org"> {{ stream.title }} </a></h3>
+                    </div>
+                </nav>
+            </header>
+        </div>
+        <div class="content">
+            <div id="player"></div>
+	    <div id="description" class="authorInfo">{{ stream.description | safe}}
+		{% if stream.img_src %}
+		<img src="media/{{ stream.img_src }}" alt="{{title}}">
+		{% endif %}
+	</div>	    
+
+        </div>      
+        <div class="comments">
+            <div class="" style="margin-left:0;margin-right:0;">
+	<!-- To enable comments -->  
+              <div id="comment_thread">
+
+                </div>
+              </div>
+        </div>
+        <footer class="fixed-bottom">
+            <p>Developed by <a target="_blank" href="https://swecha.org/">Swecha</a> - <a target="_blank" href="https://fsmi.in/#/">FSMI</a></p>
+          </footer>
+    </div>
+<script>
+			const roomName='{{stream.comments_room}}';
+			const commentHost = '{{stream.comments_server}}';
+			var d = document, s = d.createElement('script');
+			s.src = 'https://'+commentHost+'/static/comments.js';
+			(d.head || d.body).appendChild(s);
+</script>
     <script>
-      const roomName= '{{ stream.comments_room }}' ;
-      const commentHost = '{{ stream.comments_server }}';
-      var d = document, s = d.createElement('script');
-      s.src = 'http://'+commentHost+'/static/comments.js';
-      (d.head || d.body).appendChild(s);
-    </script>
-
-    <script>
-      OvenPlayer.debug(true);
-      let webrtcSources = OvenPlayer.generateWebrtcUrls([
-        {
-          host : '{{ stream.stream_url }}',
-          application : 'app',
-          stream : "stream_o",
-          width:"320",
-          height:"160",
-          label : "Stream 1"
-        }
-      ]);
-
-      let player = OvenPlayer.create("player", {
-        autoStart : true,
-        sources: webrtcSources
-      });
-      player.on("error", function(error){
-        console.log(error);
-      });
-      player.on("ready", function(data) {
-        player.play();
-      });
-    </script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-  </body>
+        OvenPlayer.debug(true);
+        let webrtcSources = OvenPlayer.generateWebrtcUrls([
+                    {
+                        host : '{{stream.stream_url}}',
+		//	host : 'ws://95.217.152.160:3333'.
+                        application : 'app',
+                        stream : "{{stream.stream_key}}_o",
+                        width:"320",
+                        height:"160",
+                        label : "Stream 1"
+                    },
+          ]);
+  
+        let player = OvenPlayer.create("player", {
+            autoStart : true,
+            sources: webrtcSources
+        });
+        player.on("error", function(error){
+          console.log(error);
+        });
+        player.on("ready", function(data) {
+              player.play();
+        });
+      </script>
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+      
+</body>
 </html>

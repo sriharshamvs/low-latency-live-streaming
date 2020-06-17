@@ -25,7 +25,7 @@ SECRET_KEY = '%m-3w)n18mvw7!np@s6bfsu$ak!$j4ia3v7lo)b^&!81g3d+d+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'live.swecha.org', '95.217.152.160']
 
 
 # Application definition
@@ -38,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_forms_bootstrap',
+    'phonenumber_field',
+    
 ]
+
+PHONENUMBER_DEFAULT_REGION="IN"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,8 +83,12 @@ WSGI_APPLICATION = 'liveStreamProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'swechalive',
+        'USER': 'swechalive',
+        'PASSWORD': 'SWECHAlive!@#',
+        'HOST': '95.217.152.160',
+        'PORT': ''
     }
 }
 
@@ -121,5 +130,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = '/var/www/html/liveStream/media'
+STATIC_ROOT = '/var/www/html/liveStream/static'
 MEDIA_URL = '/media/'
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
