@@ -2,11 +2,11 @@
 
 Generating a Live Stream Site template
 
-### Environment
+## Environment
 
 - This project uses `Python3.6`
 
-### Installing
+## Installing
 
 Clone the project and go the project root directory
 
