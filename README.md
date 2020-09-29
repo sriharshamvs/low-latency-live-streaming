@@ -1,6 +1,6 @@
 # Swecha Live
 
-- Generating a Live Stream Site template
+Generating a Live Stream Site template
 
 ### Environment
 
