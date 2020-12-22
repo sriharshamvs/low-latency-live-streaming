@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'liveStreamProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'swechalive',
-        'USER': 'swechalive',
-        'PASSWORD': 'SWECHAlive!@#',
-        'HOST': 'localhost',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
         'PORT': ''
     }
 }
