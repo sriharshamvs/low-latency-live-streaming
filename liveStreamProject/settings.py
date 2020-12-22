@@ -25,7 +25,7 @@ SECRET_KEY = '%m-3w)n18mvw7!np@s6bfsu$ak!$j4ia3v7lo)b^&!81g3d+d+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'live.swecha.org', '95.217.152.160']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'live.swecha.org', '95.217.152.160']
 
 
 # Application definition
@@ -87,10 +87,20 @@ DATABASES = {
         'NAME': 'swechalive',
         'USER': 'swechalive',
         'PASSWORD': 'SWECHAlive!@#',
-        'HOST': '95.217.152.160',
+        'HOST': 'localhost',
         'PORT': ''
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'swechalive',
+#         'USER': 'swechalive',
+#         'PASSWORD': 'SWECHAlive!@#',
+#         'HOST': '95.217.152.160',
+#         'PORT': ''
+#     }
+# }
 
 
 # Password validation
