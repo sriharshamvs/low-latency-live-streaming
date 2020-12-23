@@ -11,21 +11,33 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from environ import Env
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+env = Env()
+env.read_env(env_file='config/.env')
 
+# DB Variables
+DATABASES_ENGINE = env('DATABASES_ENGINE')
+DATABASES_NAME = env('DATABASES_NAME')
+DATABASES_USER = env('DATABASES_USER')
+DATABASES_PASSWORD = env('DATABASES_PASSWORD')
+DATABASES_HOST = env('DATABASES_HOST')
+
+# Allowed Hosts
+ALLOWED = env('ALLOWED').split(' ')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%m-3w)n18mvw7!np@s6bfsu$ak!$j4ia3v7lo)b^&!81g3d+d+'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG', default=False)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'live.swecha.org', '95.217.152.160']
+ALLOWED_HOSTS = ALLOWED
 
 
 # Application definition
@@ -83,25 +95,14 @@ WSGI_APPLICATION = 'liveStreamProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'swechalive',
-        'USER': 'swechalive',
-        'PASSWORD': 'SWECHAlive!@#',
-        'HOST': 'localhost',
+        'ENGINE': DATABASES_ENGINE,
+        'NAME': DATABASES_NAME,
+        'USER': DATABASES_USER,
+        'PASSWORD': DATABASES_PASSWORD,
+        'HOST': DATABASES_HOST,
         'PORT': ''
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'swechalive',
-#         'USER': 'swechalive',
-#         'PASSWORD': 'SWECHAlive!@#',
-#         'HOST': '95.217.152.160',
-#         'PORT': ''
-#     }
-# }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
