@@ -6,6 +6,7 @@ class LiveStream(models.Model):
     title = models.CharField(max_length=1000)
     stream_key = models.CharField(max_length=50)
     icon_url = models.CharField(max_length=1000)
+    icon_redirect_link = models.CharField(max_length=1000, blank=True)
     stream_url = models.CharField(max_length=1000)
     matomo_site_id = models.CharField(max_length=50)
     comments_server = models.CharField(max_length=1000)
@@ -13,6 +14,11 @@ class LiveStream(models.Model):
     img_src = models.ImageField(upload_to=fs, blank=True, null=True)
     promote_to_frontpage = models.BooleanField(default=False)
     collect_details = models.BooleanField(default=False)
+    facebook_link = models.CharField(max_length=1000, blank=True)
+    pleroma_link = models.CharField(max_length=1000, blank=True)
+    telegram_link = models.CharField(max_length=1000, blank=True)
+    twitter_link = models.CharField(max_length=1000, blank=True)
+    youtube_link = models.CharField(max_length=1000, blank=True)
     description = models.TextField()
     
     def __str__(self):

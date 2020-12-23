@@ -114,11 +114,13 @@
     <main>
       <header>
         <div class="logo">
-          <img src="{{ stream.icon_url }}" alt="" id="logo" />
+          <a href="{{stream.icon_redirect_link}}">
+            <img src="{{ stream.icon_url }}" alt="" id="logo" />
+          </a>
         </div>
         <h1 id="title">{{ stream.title }}</h1>
         <div class="socials">
-          <a href="#">
+          <a href="{{stream.facebook_link}}">
             <svg
               width="25"
               height="25"
@@ -131,7 +133,7 @@
               />
             </svg>
           </a>
-          <a href="#">
+          <a href="{{stream.pleroma_link}}">
             <svg
               width="25"
               height="25"
@@ -146,7 +148,7 @@
               />
             </svg>
           </a>
-          <a href="#">
+          <a href="{{stream.telegram_link}}">
             <svg
               width="30"
               height="25"
@@ -160,7 +162,7 @@
               />
             </svg>
           </a>
-          <a href="#">
+          <a href="{{stream.twitter_link}}">
             <svg
               width="31"
               height="25"
@@ -172,7 +174,7 @@
               />
             </svg>
           </a>
-          <a href="#">
+          <a href="{{stream.youtube_link}}">
             <svg
               width="37"
               height="25"
@@ -303,7 +305,7 @@
         <p>{{ stream.description | safe}}</p>
       </section>
       <div class="socials-second">
-        <a href="#">
+        <a href="{{stream.facebook_link}}">
           <svg
             width="25"
             height="25"
@@ -316,7 +318,7 @@
             />
           </svg>
         </a>
-        <a href="#">
+        <a href="{{stream.pleroma_link}}">
           <svg
             width="25"
             height="25"
@@ -331,7 +333,7 @@
             />
           </svg>
         </a>
-        <a href="#">
+        <a href="{{stream.telegram_link}}">
           <svg
             width="30"
             height="25"
@@ -345,7 +347,7 @@
             />
           </svg>
         </a>
-        <a href="#">
+        <a href="{{stream.twitter_link}}">
           <svg
             width="31"
             height="25"
@@ -357,7 +359,7 @@
             />
           </svg>
         </a>
-        <a href="#">
+        <a href="{{stream.youtube_link}}">
           <svg
             width="37"
             height="25"
