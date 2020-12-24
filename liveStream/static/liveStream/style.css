@@ -31,6 +31,7 @@ body {
   padding: 20px;
   font-size: 1.4rem;
   font-weight: 300;
+  overflow-x: hidden;
 }
 
 main {
@@ -215,7 +216,6 @@ header .theme-toggle {
       -ms-grid-row-align: stretch;
       align-self: stretch;
   background: var(--chat-bg);
-  width: 300px;
   max-height: 473px;
   position: relative;
 }
