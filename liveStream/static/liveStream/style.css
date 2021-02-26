@@ -224,10 +224,16 @@
   
   #comment_thread {
     padding-right: 5px;
-    max-height: 350px;
+    max-height: 500px;
     overflow-y: auto;
   }
-  
+
+  #chat-message-input {
+    width: 270px;
+  }
+  #chat-message-username {
+    width: 270px;
+  }
   .chatbox {
     overflow-y: auto;
     max-height: calc(100% - 60px);
@@ -277,7 +283,6 @@
     background: var(--accent);
     border-radius: 5px;
   }
-  
   .chatbox__comment-text {
     margin-right: 10px;
     font-size: 1.6rem;
