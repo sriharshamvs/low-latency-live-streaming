@@ -11,15 +11,16 @@ html {
   --accent: #1e7fbb;
   --chat-bg: #ccc;
   --input-bg: #fff;
+  --border: #666;
   font-size: 62.5%;
 }
 
 html[data-theme="dark"] {
-  --bg: #1f1f1f;
+  --bg: #111;
   --accent: #009dff;
   --text: #e4e4e4;
-  --chat-bg: #040404;
-  --input-bg: #000;
+  --chat-bg: #222222;
+  --input-bg: #111;
 }
 
 body {
@@ -180,7 +181,7 @@ header .theme-toggle {
 }
 
 .video {
-  border: 1px solid var(--text);
+  border: 1px solid var(--border);
   border-radius: 10px;
   overflow: hidden;
   -ms-grid-row: 2;
@@ -233,19 +234,23 @@ header .theme-toggle {
 
 #chat-message-input {
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   border-radius: 4px;
   padding: 5px;
   background: var(--input-bg);
   color: var(--text);
+  outline: none;
+  border: 1px solid var(--border);
 }
 #chat-message-username {
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   border-radius: 4px;
   padding: 5px;
   background: var(--input-bg);
   color: var(--text);
+  outline: none;
+  border: 1px solid var(--border);
 }
 .chatbox {
   overflow-y: auto;
@@ -476,16 +481,17 @@ textarea::placeholder {
   border: none;
   border-radius: 4px;
   width: 100%;
+  transition: background-color 0.5s ease-in-out;
 }
 
 #load-comments:hover {
-  background-color: #0000ff;
+  background-color: #075cc6;
 }
 
 #load-comments:active {
-  background-color: #0000ff;
-  box-shadow: 0 2px #666;
-  transform: translateY(4px);
+  background-color: #04489d;
+  /* box-shadow: 0 2px #666; */
+  /* transform: translateY(4px); */
 }
 
 #chat-message-submit {
@@ -501,16 +507,17 @@ textarea::placeholder {
   border: none;
   border-radius: 5px;
   margin-bottom: 20px;
+  transition: background-color 0.5s ease-in-out;
 }
 
 #chat-message-submit:hover {
-  background-color: #0000ff;
+  background-color: #075cc6;
 }
 
 #chat-message-submit:active {
-  background-color: #0000ff;
-  box-shadow: 0 2px #666;
-  transform: translateY(4px);
+  background-color: #04489d;
+  /* box-shadow: 0 2px #666; */
+  /* transform: scale(1.01); */
 }
 
 
