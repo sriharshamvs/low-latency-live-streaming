@@ -513,4 +513,10 @@ textarea::placeholder {
   transform: translateY(4px);
 }
 
-/*# sourceMappingURL=main.css.map */
+
+@media (min-width: 950px) {
+    .video {
+        min-width: 634px;
+        max-width: 800px;
+    }
+}
