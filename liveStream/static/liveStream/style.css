@@ -232,16 +232,20 @@ header .theme-toggle {
 }
 
 #chat-message-input {
-  width: 270px;
+  width: 100%;
   margin-bottom: 5px;
   border-radius: 4px;
   padding: 5px;
+  background: var(--input-bg);
+  color: var(--text);
 }
 #chat-message-username {
-  width: 270px;
+  width: 100%;
   margin-bottom: 5px;
   border-radius: 4px;
   padding: 5px;
+  background: var(--input-bg);
+  color: var(--text);
 }
 .chatbox {
   overflow-y: auto;
