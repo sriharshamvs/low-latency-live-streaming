@@ -49,8 +49,9 @@ main {
   main {
     grid-template-areas:
       "nav"
-      "desc"
+      "title-mobile"
       "video"
+      "desc-mobile"
       "chat";
   }
 }
@@ -59,12 +60,13 @@ main {
   main {
     grid-template-areas:
       "nav"
-      "socials"
-      "desc"
+      "title-mobile"
       "video"
       "video"
+      "desc-mobile"
       "chat"
-      "chat";
+      "chat"
+      "socials";
   }
 }
 
@@ -415,11 +417,25 @@ textarea::placeholder {
   align-self: end;
 }
 
+.title-mobile {
+  grid-area: title-mobile;
+  display: none;
+}
+
+.desc-mobile {
+  grid-area: desc-mobile;
+  display: none;
+}
+
 @media (max-width: 950px) {
   .desc {
     -ms-flex-item-align: start;
     -ms-grid-row-align: start;
     align-self: start;
+    display: none;
+  }
+  .title-mobile, .desc-mobile {
+    display: block;
   }
 }
 

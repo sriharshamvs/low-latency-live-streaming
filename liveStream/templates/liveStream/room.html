@@ -144,11 +144,17 @@
           <!-- Comments -->
         </div>
       </div>
+
       <section class="desc">
         <h1>{{ stream.title }}</h1>
         <hr />
         <p>{{ stream.description | safe}}</p>
       </section>
+      <!-- For Mobile View -->
+      <h1 class="title-mobile">{{ stream.title }}</h1>
+      <p class="desc-mobile">{{ stream.description | safe}}</p>
+      <!---->
+
       {%if stream.enable_social_media_links %}
         <div class="socials-second">
           <a href="{{stream.facebook_link}}">
