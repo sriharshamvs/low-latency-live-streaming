@@ -14,6 +14,7 @@ class LiveStream(models.Model):
     img_src = models.ImageField(upload_to=fs, blank=True, null=True)
     promote_to_frontpage = models.BooleanField(default=False)
     collect_details = models.BooleanField(default=False)
+    enable_social_media_links = models.BooleanField(default=False)
     facebook_link = models.CharField(max_length=1000, blank=True)
     pleroma_link = models.CharField(max_length=1000, blank=True)
     telegram_link = models.CharField(max_length=1000, blank=True)
