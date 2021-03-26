@@ -119,7 +119,7 @@ header {
 }
 
 header div.logo {
-  height: 50px;
+  height: 70px;
   min-width: 50px;
 }
 
@@ -136,7 +136,7 @@ header #title {
   margin-right: auto;
   font-size: 3.2rem;
   font-weight: 900;
-  max-width: 350px;
+  max-width: 450px;
 }
 
 header .socials {
@@ -418,6 +418,8 @@ textarea::placeholder {
 }
 
 .title-mobile {
+  font-size: 3.2rem;
+  font-weight: 900;
   grid-area: title-mobile;
   display: none;
 }

@@ -3,7 +3,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 fs = "gallery"
 class LiveStream(models.Model):
-    title = models.CharField(max_length=1000)
+    title = models.CharField(max_length=50)
     stream_key = models.CharField(max_length=50)
     icon_url = models.CharField(max_length=1000)
     icon_redirect_link = models.CharField(max_length=1000, blank=True)
