@@ -5,9 +5,8 @@ const themeButton = document.querySelector(".theme-toggle")
 let currentTheme = localStorage.getItem("data-theme")
 if (!currentTheme) {
   localStorage.setItem("data-theme", "light")
+  applyTheme("light")
 }
-
-applyTheme(currentTheme)
 
 themeButton.addEventListener("click", (e) => {
   if (document.documentElement.getAttribute("data-theme") === "light") {
