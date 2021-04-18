@@ -49,10 +49,10 @@ main {
   main {
     grid-template-areas:
       "nav"
-      "title-mobile"
       "video"
-      "desc-mobile"
-      "chat";
+      "chat"
+      "title-mobile"
+      "desc-mobile";
   }
 }
 
@@ -60,12 +60,10 @@ main {
   main {
     grid-template-areas:
       "nav"
+      "video"
+      "chat"
       "title-mobile"
-      "video"
-      "video"
       "desc-mobile"
-      "chat"
-      "chat"
       "socials";
   }
 }

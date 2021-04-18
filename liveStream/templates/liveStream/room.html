@@ -151,8 +151,10 @@
         <p>{{ stream.description | safe}}</p>
       </section>
       <!-- For Mobile View -->
-      <h1 class="title-mobile">{{ stream.title }}</h1>
-      <p class="desc-mobile">{{ stream.description | safe}}</p>
+      <section class="desc-mobile">
+        <h1 class="title-mobile">{{ stream.title }}</h1>
+        <p class="desc-mobile">{{ stream.description | safe}}</p>
+      </section>
       <!---->
 
       {%if stream.enable_social_media_links %}
