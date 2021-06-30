@@ -115,10 +115,10 @@ python3 manage.py createsuperuser
 
   - `templates/liveStream/room.html`
 
-- Run the Server
+- Run the Server on port 9000
 
 ```bash
-python3 manage.py runserver
+python3 manage.py runserver 9000
 ```
 
 ## Reporting Issues/Features
