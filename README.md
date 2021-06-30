@@ -2,10 +2,6 @@
 
 Generating a Live Stream Site template
 
-## Environment
-
-- This project uses `Python3.6` or `Python3.7`
-
 ## Prerequisites
 
 - This project uses Python3.6 or Python 3.7
