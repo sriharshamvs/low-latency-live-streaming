@@ -32,12 +32,9 @@ def room(request, stream_key):
     if stream:
         stream = stream[0]
         if stream.collect_details:
-
-
             cookie = None
             if 'contact_id' in request.session:
                 cookie = request.session['contact_id']
-            print(cookie)
             if request.method == 'GET':
                 if not cookie:
                     f = ContactDetailsForm()
@@ -45,7 +42,6 @@ def room(request, stream_key):
                 else:
                     contact = ContactDetail.objects.filter(id=cookie)[0]
                     return render(request, 'liveStream/room.html', {'stream': stream, 'contact':contact})
-
 
             elif request.method == 'POST':
                 f = ContactDetailsForm(request.POST)

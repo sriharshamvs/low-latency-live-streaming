@@ -1,116 +1,287 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="live.swecha.org is a platform where we do our streams. Users can watch and comment when they join the stream."
+    />
+    <title>{{stream.title}}</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'liveStream/style.css' %}" />
+    <script src="{% static 'liveStream/js/motomo.js' %}"></script>
+    <script src="{% static 'liveStream/js/ovenplayer/ovenplayer.js' %}"></script>
+  </head>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     
-   <title> {{stream.title}} </title>
-   
-    <script src="{% static 'liveStream/ovenplayer/ovenplayer.js' %}"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css" crossorigin="anonymous"></script>
-<link rel="shortcut icon" type="image/png" href="/swecha-birds-icon.png"/>
-    <link rel="stylesheet" href="{% static 'liveStream/style.css' %}">
-<!-- Matomo -->
-	<script type="text/javascript">
-		  var _paq = window._paq || [];
-  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-	  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-	      var u="//analytics.patham.in/";
-	      _paq.push(['setTrackerUrl', u+'matomo.php']);
-	      _paq.push(['setSiteId', '{{ stream.matomo_site_id }}']);
-	      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-	      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-	    })();
-	</script>
-	<!-- End Matomo Code -->
-
-</head>
-<body>
-    <div class="wrapperContainer">
-        <div class="navigation">
-            <header>
-                <nav>
-            
- <div class="logo">
-
-                     <table>
-                        <tr>
-                        <td><img src="{{ stream.icon_url }}" alt="logo"></td>
-                        </tr>
-                     </table>
-
-                    
-                   </div>
-                    <div class="headerContent">
-			<h3><a href="https://swecha.org"> {{ stream.title }} </a></h3>
-                    </div>
-                </nav>
-            </header>
+  <body>
+    <main>
+      <header>
+        <div class="logo">
+          <a href="{{stream.icon_redirect_link}}">
+            <img src="{{ stream.icon_url }}" alt="" id="logo" />
+          </a>
         </div>
-        <div class="content">
-            <div id="player"></div>
-	    <div id="description" class="authorInfo">{{ stream.description | safe}}
-		{% if stream.img_src %}
-		<img src="media/{{ stream.img_src }}" alt="{{title}}">
-		{% endif %}
-	</div>	    
-
-        </div>      
-        <div class="comments">
-            <div class="" style="margin-left:0;margin-right:0;">
-	<!-- To enable comments -->  
-              <div id="comment_thread">
-
-                </div>
-              </div>
+        <h1 id="title">{{ stream.title }}</h1>
+        {%if stream.enable_social_media_links %}
+        <div class="socials">
+          <a href="{{stream.facebook_link}}">
+            <svg
+              width="25"
+              height="25"
+              viewBox="0 0 25 25"
+              fill="var(--text)"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M23.6198 0H1.38021C0.617708 0 0 0.617708 0 1.38021V23.6208C0 24.3823 0.617708 25 1.38021 25H13.3542V15.3187H10.0958V11.5458H13.3542V8.76354C13.3542 5.53437 15.326 3.77604 18.2073 3.77604C19.5875 3.77604 20.7729 3.87917 21.1187 3.925V7.3L19.1208 7.30104C17.5542 7.30104 17.251 8.04583 17.251 9.1375V11.5469H20.9875L20.501 15.3198H17.251V25H23.6219C24.3823 25 25 24.3823 25 23.6198V1.38021C25 0.617708 24.3823 0 23.6198 0V0Z"
+              />
+            </svg>
+          </a>
+          <a href="{{stream.pleroma_link}}">
+            <svg
+              width="25"
+              height="25"
+              fill="var(--text)"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4.72 9.324a2.63 2.63 0 01-1.124 1.12l6.174 6.198 1.49-.755-6.54-6.563zm8.145 8.176l-1.489.754 3.13 3.14c.25-.48.643-.87 1.124-1.119L12.865 17.5zM20.01 11.776l-3.497 1.772.258 1.648 3.955-2.004a2.63 2.63 0 01-.717-1.416zm-5.526 2.8L6.22 18.765c.38.387.63.881.717 1.416l7.806-3.956-.258-1.649zM11.826 4.258l-3.988 7.786 1.177 1.182 4.223-8.243a2.63 2.63 0 01-1.412-.725zM6.801 14.07l-2.02 3.944a2.63 2.63 0 011.411.724l1.786-3.486-1.177-1.182zM3.561 10.46a2.63 2.63 0 01-1.567.248l1.18 7.546a2.63 2.63 0 011.567-.248L3.56 10.46zM6.943 20.218c.027.175.036.353.027.53a2.63 2.63 0 01-.277 1.037l7.544 1.211a2.624 2.624 0 01-.028-.53c.02-.361.115-.714.277-1.037l-7.543-1.21zM20.753 13.22l-3.482 6.797a2.63 2.63 0 011.412.725l3.482-6.798a2.63 2.63 0 01-1.412-.725zM16.004 3.605a2.63 2.63 0 01-1.125 1.12l5.392 5.413a2.63 2.63 0 011.125-1.12l-5.392-5.413zM11.082 2.815L4.266 6.269c.379.387.63.882.717 1.416l6.816-3.455a2.63 2.63 0 01-.717-1.415zM14.867 4.731a2.63 2.63 0 01-1.566.262l.604 3.866 1.647.264-.685-4.392zm-.611 6.376l1.427 9.141a2.63 2.63 0 011.57-.234l-1.35-8.643-1.647-.264zM4.988 7.714c.028.178.037.358.029.538a2.63 2.63 0 01-.274 1.03l3.87.622.76-1.486-4.385-.704zM11.62 8.78l-.761 1.486 9.143 1.468a2.628 2.628 0 01-.027-.524 2.63 2.63 0 01.28-1.043L11.62 8.78z"
+              />
+              <path
+                d="M13.544 4.778a2.39 2.39 0 10.26-4.774 2.39 2.39 0 00-.26 4.774zM22.471 13.74a2.39 2.39 0 10.26-4.775 2.39 2.39 0 00-.26 4.774zM16.705 24.996a2.39 2.39 0 10.26-4.774 2.39 2.39 0 00-.26 4.774zM4.214 22.992a2.39 2.39 0 10.26-4.774 2.39 2.39 0 00-.26 4.774zM2.26 10.496a2.39 2.39 0 10.26-4.774 2.39 2.39 0 00-.26 4.774z"
+              />
+            </svg>
+          </a>
+          <a href="{{stream.telegram_link}}">
+            <svg
+              width="30"
+              height="25"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="var(--text)"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M22.98 24.724c.403.285.922.356 1.384.181a1.45 1.45 0 00.905-1.05c1.087-5.105 3.722-18.026 4.71-22.67a.976.976 0 00-.325-.947 1.001 1.001 0 00-.996-.175C23.417 2.003 7.276 8.059.678 10.5A1.033 1.033 0 000 11.5c.015.442.313.826.742.955 2.958.885 6.842 2.116 6.842 2.116s1.815 5.482 2.761 8.269c.12.35.393.625.754.72.36.094.745-.005 1.014-.259l3.87-3.654s4.465 3.274 6.997 5.078zM9.218 13.878l2.099 6.922.466-4.384L24.514 4.934a.347.347 0 00.041-.471.355.355 0 00-.47-.08c-5.357 3.42-14.867 9.495-14.867 9.495z"
+              />
+            </svg>
+          </a>
+          <a href="{{stream.twitter_link}}">
+            <svg
+              width="31"
+              height="25"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="var(--text)"
+            >
+              <path
+                d="M30.763 2.96a12.6 12.6 0 01-3.625.993A6.321 6.321 0 0029.913.461a12.643 12.643 0 01-4.008 1.532A6.3 6.3 0 0021.298 0c-4.075 0-7.069 3.802-6.148 7.748A17.917 17.917 0 012.142 1.155 6.32 6.32 0 004.094 9.58a6.285 6.285 0 01-2.857-.79c-.07 2.925 2.026 5.66 5.062 6.269a6.326 6.326 0 01-2.851.107 6.316 6.316 0 005.896 4.383A12.69 12.69 0 010 22.165 17.867 17.867 0 009.675 25c11.718 0 18.338-9.897 17.939-18.773a12.851 12.851 0 003.149-3.267z"
+              />
+            </svg>
+          </a>
+          <a href="{{stream.youtube_link}}">
+            <svg
+              width="37"
+              height="25"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="var(--text)"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M32.155.734A4.49 4.49 0 0135.343 3.9c.756 2.798.78 8.6.78 8.6s0 5.826-.758 8.6c-.412 1.537-1.857 2.799-3.417 3.211-2.82.734-13.898.688-13.898.688s-11.077.07-13.897-.688c-1.537-.412-3.05-1.674-3.463-3.21-.757-2.798-.688-8.6-.688-8.6s-.07-5.803.688-8.6C1.102 2.362 2.593 1.1 4.153.688 6.973-.045 18.05 0 18.05 0s11.283 0 14.104.733zM23.6 12.5l-9.013 5.55V6.95L23.6 12.5z"
+              />
+            </svg>
+          </a>
         </div>
-        <footer class="fixed-bottom">
-            <p>Developed by <a target="_blank" href="https://swecha.org/">Swecha</a> - <a target="_blank" href="https://fsmi.in/#/">FSMI</a></p>
-          </footer>
-    </div>
-<script>
-			const roomName='{{stream.comments_room}}';
-			const commentHost = '{{stream.comments_server}}';
-                        const contactName = '{{ contact.name }}';
-			var d = document, s = d.createElement('script');
-			s.src = 'https://'+commentHost+'/static/comments.js';
-			(d.head || d.body).appendChild(s);
+        {% endif %}
+        <div class="theme-toggle">
+          <svg
+            width="58"
+            height="58"
+            fill="var(--text)"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0)">
+              <path
+                d="M14.858 14.858c-7.81 7.81-7.81 20.474 0 28.284 7.81 7.81 20.474 7.81 28.284 0 7.81-7.81 7.81-20.474 0-28.284-7.81-7.81-20.474-7.81-28.284 0zm2.357 2.357c6.498-6.498 17.072-6.498 23.57 0l-23.57 23.57c-6.498-6.498-6.498-17.072 0-23.57z"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0">
+                <path
+                  fill="#fff"
+                  transform="rotate(45 13.636 35.364)"
+                  d="M0 0h40v40H0z"
+                />
+              </clipPath>
+            </defs>
+          </svg>
+        </div>
+      </header>
+      <div class="video">
+        <div id="player">
+          <!-- Video Player -->
+        </div>
+      </div>
+      <div class="chat">
+        <div id="comment_thread">
+          <!-- Comments -->
+        </div>
+      </div>
 
-       
+      <section class="desc">
+        <h1>{{ stream.title }}</h1>
+        <hr />
+        <p>{{ stream.description | safe}}</p>
+      </section>
+      <!-- For Mobile View -->
+      <section class="desc-mobile">
+        <h1 class="title-mobile">{{ stream.title }}</h1>
+        <p class="desc-mobile">{{ stream.description | safe}}</p>
+      </section>
+      <!---->
 
-</script>
+      {%if stream.enable_social_media_links %}
+      <div class="socials-second">
+        <a href="{{stream.facebook_link}}">
+          <svg
+            width="25"
+            height="25"
+            viewBox="0 0 25 25"
+            fill="var(--text)"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M23.6198 0H1.38021C0.617708 0 0 0.617708 0 1.38021V23.6208C0 24.3823 0.617708 25 1.38021 25H13.3542V15.3187H10.0958V11.5458H13.3542V8.76354C13.3542 5.53437 15.326 3.77604 18.2073 3.77604C19.5875 3.77604 20.7729 3.87917 21.1187 3.925V7.3L19.1208 7.30104C17.5542 7.30104 17.251 8.04583 17.251 9.1375V11.5469H20.9875L20.501 15.3198H17.251V25H23.6219C24.3823 25 25 24.3823 25 23.6198V1.38021C25 0.617708 24.3823 0 23.6198 0V0Z"
+            />
+          </svg>
+        </a>
+        <a href="{{stream.pleroma_link}}">
+          <svg
+            width="25"
+            height="25"
+            fill="var(--text)"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4.72 9.324a2.63 2.63 0 01-1.124 1.12l6.174 6.198 1.49-.755-6.54-6.563zm8.145 8.176l-1.489.754 3.13 3.14c.25-.48.643-.87 1.124-1.119L12.865 17.5zM20.01 11.776l-3.497 1.772.258 1.648 3.955-2.004a2.63 2.63 0 01-.717-1.416zm-5.526 2.8L6.22 18.765c.38.387.63.881.717 1.416l7.806-3.956-.258-1.649zM11.826 4.258l-3.988 7.786 1.177 1.182 4.223-8.243a2.63 2.63 0 01-1.412-.725zM6.801 14.07l-2.02 3.944a2.63 2.63 0 011.411.724l1.786-3.486-1.177-1.182zM3.561 10.46a2.63 2.63 0 01-1.567.248l1.18 7.546a2.63 2.63 0 011.567-.248L3.56 10.46zM6.943 20.218c.027.175.036.353.027.53a2.63 2.63 0 01-.277 1.037l7.544 1.211a2.624 2.624 0 01-.028-.53c.02-.361.115-.714.277-1.037l-7.543-1.21zM20.753 13.22l-3.482 6.797a2.63 2.63 0 011.412.725l3.482-6.798a2.63 2.63 0 01-1.412-.725zM16.004 3.605a2.63 2.63 0 01-1.125 1.12l5.392 5.413a2.63 2.63 0 011.125-1.12l-5.392-5.413zM11.082 2.815L4.266 6.269c.379.387.63.882.717 1.416l6.816-3.455a2.63 2.63 0 01-.717-1.415zM14.867 4.731a2.63 2.63 0 01-1.566.262l.604 3.866 1.647.264-.685-4.392zm-.611 6.376l1.427 9.141a2.63 2.63 0 011.57-.234l-1.35-8.643-1.647-.264zM4.988 7.714c.028.178.037.358.029.538a2.63 2.63 0 01-.274 1.03l3.87.622.76-1.486-4.385-.704zM11.62 8.78l-.761 1.486 9.143 1.468a2.628 2.628 0 01-.027-.524 2.63 2.63 0 01.28-1.043L11.62 8.78z"
+            />
+            <path
+              d="M13.544 4.778a2.39 2.39 0 10.26-4.774 2.39 2.39 0 00-.26 4.774zM22.471 13.74a2.39 2.39 0 10.26-4.775 2.39 2.39 0 00-.26 4.774zM16.705 24.996a2.39 2.39 0 10.26-4.774 2.39 2.39 0 00-.26 4.774zM4.214 22.992a2.39 2.39 0 10.26-4.774 2.39 2.39 0 00-.26 4.774zM2.26 10.496a2.39 2.39 0 10.26-4.774 2.39 2.39 0 00-.26 4.774z"
+            />
+          </svg>
+        </a>
+        <a href="{{stream.telegram_link}}">
+          <svg
+            width="30"
+            height="25"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="var(--text)"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M22.98 24.724c.403.285.922.356 1.384.181a1.45 1.45 0 00.905-1.05c1.087-5.105 3.722-18.026 4.71-22.67a.976.976 0 00-.325-.947 1.001 1.001 0 00-.996-.175C23.417 2.003 7.276 8.059.678 10.5A1.033 1.033 0 000 11.5c.015.442.313.826.742.955 2.958.885 6.842 2.116 6.842 2.116s1.815 5.482 2.761 8.269c.12.35.393.625.754.72.36.094.745-.005 1.014-.259l3.87-3.654s4.465 3.274 6.997 5.078zM9.218 13.878l2.099 6.922.466-4.384L24.514 4.934a.347.347 0 00.041-.471.355.355 0 00-.47-.08c-5.357 3.42-14.867 9.495-14.867 9.495z"
+            />
+          </svg>
+        </a>
+        <a href="{{stream.twitter_link}}">
+          <svg
+            width="31"
+            height="25"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="var(--text)"
+          >
+            <path
+              d="M30.763 2.96a12.6 12.6 0 01-3.625.993A6.321 6.321 0 0029.913.461a12.643 12.643 0 01-4.008 1.532A6.3 6.3 0 0021.298 0c-4.075 0-7.069 3.802-6.148 7.748A17.917 17.917 0 012.142 1.155 6.32 6.32 0 004.094 9.58a6.285 6.285 0 01-2.857-.79c-.07 2.925 2.026 5.66 5.062 6.269a6.326 6.326 0 01-2.851.107 6.316 6.316 0 005.896 4.383A12.69 12.69 0 010 22.165 17.867 17.867 0 009.675 25c11.718 0 18.338-9.897 17.939-18.773a12.851 12.851 0 003.149-3.267z"
+            />
+          </svg>
+        </a>
+        <a href="{{stream.youtube_link}}">
+          <svg
+            width="37"
+            height="25"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="var(--text)"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M32.155.734A4.49 4.49 0 0135.343 3.9c.756 2.798.78 8.6.78 8.6s0 5.826-.758 8.6c-.412 1.537-1.857 2.799-3.417 3.211-2.82.734-13.898.688-13.898.688s-11.077.07-13.897-.688c-1.537-.412-3.05-1.674-3.463-3.21-.757-2.798-.688-8.6-.688-8.6s-.07-5.803.688-8.6C1.102 2.362 2.593 1.1 4.153.688 6.973-.045 18.05 0 18.05 0s11.283 0 14.104.733zM23.6 12.5l-9.013 5.55V6.95L23.6 12.5z"
+            />
+          </svg>
+        </a>
+      </div>
+      {% endif %}
+    </main>
     <script>
-        OvenPlayer.debug(true);
-        let webrtcSources = OvenPlayer.generateWebrtcUrls([
-                    {
-                        host : '{{stream.stream_url}}',
-		//	host : 'ws://95.217.152.160:3333'.
-                        application : 'app',
-                        stream : "{{stream.stream_key}}_o",
-                        width:"320",
-                        height:"160",
-                        label : "Stream 1"
-                    },
-          ]);
-  
-        let player = OvenPlayer.create("player", {
-            autoStart : true,
-            sources: webrtcSources
-        });
-        player.on("error", function(error){
-          console.log(error);
-        });
-        player.on("ready", function(data) {
-              player.play();
-        });
-      </script>
-      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-      
-</body>
+      const roomName = "{{stream.comments_room}}"
+      const commentHost = "{{stream.comments_server}}"
+      const contactName = "{{ contact.name }}"
+      const commentsService = commentHost.split(":")[0] // for localhost running on a port
+
+      /*-----------Comment this section to run on localhost------------------------*/
+      const commentsScriptPath =
+        "https://" + commentHost + "/static/comments_2.js"
+      /*----------------------------------------------------------------------------*/
+
+      /*-----------Uncomment this section to run on localhost------------------------*/
+      //const commentsScriptPath = "http://" + commentHost + "/static/comments_2.js"
+      /*----------------------------------------------------------------------------*/
+      var d = document,
+        s = d.createElement("script")
+      s.src = commentsScriptPath
+      ;(d.head || d.body).appendChild(s)
+    </script>
+    <script>
+      OvenPlayer.debug(true)
+      let webrtcSources = OvenPlayer.generateWebrtcUrls([
+        {
+          host: "{{stream.stream_url}}",
+          application: "app",
+          stream: "{{stream.stream_key}}_o",
+          width: "320",
+          height: "160",
+          label: "Stream 1",
+        },
+      ])
+
+      let player = OvenPlayer.create("player", {
+        autoStart: true,
+        sources: webrtcSources,
+      })
+      player.on("error", function (error) {
+        console.log(error)
+      })
+      player.on("ready", function (data) {
+        player.play()
+      })
+    </script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Static Javascript Template -->
+    <script src="{% static 'liveStream/js/app.js' %}"></script>
+  </body>
 </html>
