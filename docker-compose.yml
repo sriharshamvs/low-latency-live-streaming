@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=swechalive
+      - POSTGRES_PASSWORD=swechalive
+      - POSTGRES_DB=swechalive
+  web:
+    build: ./app
+    command: python manage.py runserver 0.0.0.0:9000
+    volumes:
+      - ./app/:/usr/src/app/
+    ports:
+      - 9000:9000
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
