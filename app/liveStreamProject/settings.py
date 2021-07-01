@@ -16,15 +16,15 @@ from environ import Env
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 env = Env()
-env.read_env(env_file='config/.env')
+env.read_env(env_file='.env')
 
 # DB Variables
-DATABASES_ENGINE = env('DATABASES_ENGINE')
-DATABASES_NAME = env('DATABASES_NAME')
-DATABASES_USER = env('DATABASES_USER')
-DATABASES_PASSWORD = env('DATABASES_PASSWORD')
-DATABASES_HOST = env('DATABASES_HOST')
-DATABASES_PORT = env('DATABASES_PORT')
+DATABASES_ENGINE = env.str('DATABASES_ENGINE')
+DATABASES_NAME = env.str('DATABASES_NAME')
+DATABASES_USER = env.str('DATABASES_USER')
+DATABASES_PASSWORD = env.str('DATABASES_PASSWORD')
+DATABASES_HOST = env.str('DATABASES_HOST')
+DATABASES_PORT = env.str('DATABASES_PORT')
 
 # Allowed Hosts
 ALLOWED = env('ALLOWED').split(' ')

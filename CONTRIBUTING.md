@@ -16,9 +16,65 @@ Unsure where to begin contributing to the project? You can start by looking thro
 - Beginner issues - issues which should only require a few lines of code, and a test or two.
 - Help wanted issues - issues which should be a bit more involved than `beginner` issues.
 
-## How Can I Contribute?
+## Local Deployment
 
-### Local Development
+### Using Docker
+
+#### Prerequisites
+
+- [Docker](https://docs.docker.com/engine/install/debian/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+#### Deploy using Docker
+
+- Clone the project and go the project root directory
+
+```bash
+git clone git@code.swecha.org:swecha-sites/live.swecha.org.git
+cd live.swecha.org
+```
+
+- Comment & Uncomment code blocks in the following files:
+
+  - `app/liveStream/templates/liveStream/room.html`
+
+- Create **.env** file by creating a copy of **env.example**
+
+```bash
+cp env.example .env
+```
+
+- Launch SwechaLive through Docker Compose in detach mode
+
+```bash
+docker-compose up -d
+```
+
+- To Stop Docker Compose
+
+```bash
+docker-compose stop
+```
+
+- Create Django Super User
+
+  - To get information about all the running containers
+
+  ```bash
+  docker ps
+  ```
+
+  - Copy `CONTAINER ID` of **liveswechaorg_web** and replace it with _<container_id>_
+
+  ```bash
+  docker exec -it <container_id> python manage.py createsuperuser
+  ```
+
+  - Enter username, email address and password as prompted
+
+    **Note:** Remember this username and password, as it used to login to django admin portal
+
+### Installing from Scratch
 
 #### Prerequisites
 
@@ -113,7 +169,7 @@ python3 manage.py createsuperuser
 
 - Comment & Uncomment code blocks in the following files:
 
-  - `templates/liveStream/room.html`
+  - `app/liveStream/templates/liveStream/room.html`
 
 - Run the Server on port 9000
 
