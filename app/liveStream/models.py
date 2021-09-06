@@ -1,3 +1,4 @@
+from typing import Counter
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
@@ -14,6 +15,7 @@ class LiveStream(models.Model):
     img_src = models.ImageField(upload_to=fs, blank=True, null=True)
     promote_to_frontpage = models.BooleanField(default=False)
     collect_details = models.BooleanField(default=False)
+    fdp_details = models.BooleanField(default=False)
     enable_social_media_links = models.BooleanField(default=False)
     facebook_link = models.CharField(max_length=1000, blank=True)
     pleroma_link = models.CharField(max_length=1000, blank=True)
@@ -32,6 +34,20 @@ class ContactDetail(models.Model):
     mobile_number = PhoneNumberField()
     email_address = models.CharField(max_length=50)
     place = models.CharField(max_length=1000)
+    live_stream = models.ForeignKey(LiveStream, on_delete=models.CASCADE)
+    registered_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f"{self.name}"
+
+class ContactDetailFDP(models.Model):
+    name = models.CharField(max_length=1000, blank=True)
+    mobile_number = PhoneNumberField(blank=True)
+    email_address = models.CharField(max_length=50, blank=True)
+    unique_id = models.CharField(max_length=50, blank=True)
+    department = models.CharField(max_length=1000, null=True, blank=True)
+    institute = models.CharField(max_length=1000, null=True, blank=True)
+    state_of_the_institute = models.CharField(max_length=1000, null=True, blank=True)
+    country_of_the_institute = models.CharField(max_length=1000, null=True, blank=True)
     live_stream = models.ForeignKey(LiveStream, on_delete=models.CASCADE)
     registered_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
