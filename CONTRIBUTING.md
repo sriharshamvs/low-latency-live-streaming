@@ -16,6 +16,27 @@ Unsure where to begin contributing to the project? You can start by looking thro
 - Beginner issues - issues which should only require a few lines of code, and a test or two.
 - Help wanted issues - issues which should be a bit more involved than `beginner` issues.
 
+## Swecha Live Architecture
+
+### Current architecture diagram consists of:
+- BBB (Big Blue Button Instance)
+- BlueTrace (Service to Convert to FFMPEG)
+- Oven Media Engine Origin
+- Oven Media Engine Edge
+- BlueCoat (Web Application to start/stop BlueTrace Service)
+- Comments (Server)
+
+### Repository Links:
+- [Swecha Live](https://code.swecha.org/swecha-sites/live.swecha.org)
+- [BlueCoat](https://code.swecha.org/swecha-sites/bluecoat)
+- [BlueTrace](https://code.swecha.org/swecha-sites/bluetrace)
+- [Comments](https://code.swecha.org/swecha-sites/swecha-comments)
+
+
+### Architecture
+
+![SwechaLive](/uploads/94f26a93e0c57f542c1fe8589961bf89/SwechaLive.jpg)
+
 ## Local Deployment
 
 ### Using Docker
