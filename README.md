@@ -1,4 +1,4 @@
-# Low Latency Live Streaming Architecture
+# Low Latency Live Streaming
 
 Generating a Live Stream Site template
 
