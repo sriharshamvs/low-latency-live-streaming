@@ -6,9 +6,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=swechalive
-      - POSTGRES_PASSWORD=swechalive
-      - POSTGRES_DB=swechalive
+      - POSTGRES_USER=livestream
+      - POSTGRES_PASSWORD=livestream
+      - POSTGRES_DB=livestream
   web:
     build: ./app
     command: python manage.py runserver 0.0.0.0:9000
